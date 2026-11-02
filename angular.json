@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "template-frontend-angular": {
+    "sobramar-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "template-frontend-angular:build:production"
+              "buildTarget": "sobramar-frontend:build:production"
             },
             "development": {
-              "buildTarget": "template-frontend-angular:build:development",
+              "buildTarget": "sobramar-frontend:build:development",
               "proxyConfig": "proxy.conf.json"
             }
           },

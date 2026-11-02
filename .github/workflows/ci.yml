@@ -72,7 +72,7 @@ jobs:
             -Dsonar.exclusions=src/**/*.spec.ts,src/testing/**
             -Dsonar.tests=src
             -Dsonar.test.inclusions=src/**/*.spec.ts
-            -Dsonar.javascript.lcov.reportPaths=coverage/template-frontend-angular/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=coverage/sobramar-frontend/lcov.info
             -Dsonar.qualitygate.wait=true
 
   segredos:

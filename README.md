@@ -1,8 +1,8 @@
-# template-frontend-angular
+# Sobramar: frontend
 
-Modelo de frontend **Angular 22** com um quality gate que roda a cada PR. Clique em **Use this template** para criar um projeto novo já no padrão.
+Interface do **Sobramar**, que mostra quanto do futuro financeiro de uma pessoa já está comprometido e quanto sobra em cada mês. Angular 22.
 
-Par do [template-backend-spring](https://github.com/RodrigoMuller0018/template-backend-spring): a feature de exemplo consome a API de tarefas dele.
+O backend está em [sobramar-backend](https://github.com/RodrigoMuller0018/sobramar-backend). A feature `tarefas` ainda é o exemplo herdado do modelo.
 
 ## O que já vem pronto
 
@@ -17,7 +17,7 @@ Par do [template-backend-spring](https://github.com/RodrigoMuller0018/template-b
 ## Pré-requisitos
 
 - Node.js 22 (≥ 22.22.3) ou 24 (≥ 24.15.0). A versão do CI está no `.nvmrc`.
-- Para usar a tela de tarefas, o [template-backend-spring](https://github.com/RodrigoMuller0018/template-backend-spring) rodando na porta 8080.
+- Para usar a tela de tarefas, o [sobramar-backend](https://github.com/RodrigoMuller0018/sobramar-backend) rodando na porta 8080.
 
 ## Comandos
 
@@ -29,23 +29,6 @@ Par do [template-backend-spring](https://github.com/RodrigoMuller0018/template-b
 | `npm test`        | Testes em modo watch                                                                        |
 | `npm run test:ci` | Testes uma vez, com cobertura (relatório em `coverage/`)                                    |
 | `npm run lint`    | ESLint, incluindo as regras de acessibilidade de template                                   |
-
-## Depois de criar um projeto a partir deste modelo
-
-1. **Renomeie** o `name` no `package.json`, o projeto no `angular.json` (e o caminho do `lcov.info` no `ci.yml`) e o `<title>` do `src/index.html`.
-2. **Apague a feature `tarefas`** quando criar a primeira feature real. Use-a como referência antes disso.
-3. **Revise `features/legal/`:** os textos são modelos. Ajuste ao que o projeto realmente coleta (veja o checklist abaixo).
-4. **Ligue o Dependency graph:** _Settings → Advanced Security → Dependabot alerts → Enable_ (liga o grafo junto). Sem ele, o check `Dependências vulneráveis` falha em todo PR.
-5. **Proteja a `main`:** _Settings → Rules → Rulesets → New branch ruleset_, alvo `main`, marcando:
-   - _Require a pull request before merging_
-   - _Require status checks to pass_ → adicione `Build, testes e análise estática`, `Segredos no código` e `Dependências vulneráveis`
-   - _Block force pushes_
-6. **SonarQube Cloud (opcional, grátis em repositório público):**
-   1. Entre em [sonarcloud.io](https://sonarcloud.io) com o GitHub e importe o repositório.
-   2. Em _Settings → Secrets and variables → Actions_:
-      - Secret `SONAR_TOKEN`: o token gerado no Sonar
-      - Variables `SONAR_ORGANIZATION` e `SONAR_PROJECT_KEY`: os valores que o Sonar mostrar
-   3. No Sonar, desative a _Automatic Analysis_ (a análise passa a vir do CI, com cobertura).
 
 ## Conformidade web e LGPD
 
