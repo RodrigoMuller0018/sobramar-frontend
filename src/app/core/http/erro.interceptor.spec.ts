@@ -39,9 +39,9 @@ describe('erroInterceptor', () => {
   });
 
   it('deve deixar o 4xx para quem chamou, sem aviso global', () => {
-    const erro = requisitarERetornar(422, { codigo: 'TAREFA_JA_CONCLUIDA' });
+    const erro = requisitarERetornar(422, { codigo: 'VALOR_INVALIDO' });
 
-    expect(erro?.codigo).toBe('TAREFA_JA_CONCLUIDA');
+    expect(erro?.codigo).toBe('VALOR_INVALIDO');
     expect(notificacao.atual()).toBeNull();
   });
 

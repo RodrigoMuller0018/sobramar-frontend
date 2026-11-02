@@ -1,0 +1,61 @@
+<div class="grafico">
+  <svg
+    [attr.viewBox]="'0 0 ' + largura() + ' ' + alturaTotal"
+    [attr.width]="largura()"
+    [attr.height]="alturaTotal"
+    aria-hidden="true"
+    focusable="false"
+  >
+    @for (barra of barras(); track barra.mes.competencia) {
+      <svg:rect
+        class="terra"
+        [attr.x]="barra.x"
+        [attr.y]="barra.yTerra"
+        [attr.width]="barra.larguraBarra"
+        [attr.height]="barra.alturaTerra"
+      />
+      <svg:rect
+        class="agua"
+        [attr.x]="barra.x"
+        [attr.y]="barra.yAgua"
+        [attr.width]="barra.larguraBarra"
+        [attr.height]="barra.alturaAgua"
+      />
+      <svg:text class="rotulo" [attr.x]="barra.centro" [attr.y]="barra.rotuloY">
+        {{ barra.abreviacao }}
+      </svg:text>
+    }
+  </svg>
+</div>
+<p class="legenda">
+  <span class="amostra amostra--terra"></span> Terra seca: o que sobra.
+  <span class="amostra amostra--agua"></span> Água: os compromissos.
+</p>
+
+<div class="rolagem" role="region" aria-labelledby="titulo-ano" tabindex="0">
+  <table>
+    <caption id="titulo-ano">
+      Receitas, compromissos e sobra por mês
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Mês</th>
+        <th scope="col" class="direita">Receitas</th>
+        <th scope="col" class="direita">Compromissos</th>
+        <th scope="col" class="direita">Sobra</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (barra of barras(); track barra.mes.competencia) {
+        <tr>
+          <th scope="row">
+            <a [routerLink]="['/mes', barra.mes.competencia]">{{ barra.nome }}</a>
+          </th>
+          <td class="direita"><app-valor [centavos]="barra.mes.receitasCentavos" /></td>
+          <td class="direita"><app-valor [centavos]="barra.mes.compromissosCentavos" /></td>
+          <td class="direita"><app-valor [centavos]="barra.mes.sobraCentavos" /></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

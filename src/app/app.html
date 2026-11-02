@@ -1,9 +1,28 @@
 <a class="pular" href="#conteudo" (click)="pularParaConteudo($event)">Pular para o conteúdo</a>
 
 <header class="topo">
-  <nav class="topo__nav" aria-label="Principal">
-    <a routerLink="/tarefas" routerLinkActive="ativo" ariaCurrentWhenActive="page">Tarefas</a>
-  </nav>
+  <a class="marca" routerLink="/">Sobramar</a>
+  @if (usuario()) {
+    <nav class="topo__nav" aria-label="Principal">
+      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="ativo"
+        >Mês atual</a
+      >
+      <a routerLink="/ano" routerLinkActive="ativo" ariaCurrentWhenActive="page">Ano</a>
+    </nav>
+    <div class="topo__acoes">
+      <button
+        type="button"
+        class="botao-secundario"
+        [attr.aria-pressed]="ocultos()"
+        (click)="alternarValores()"
+      >
+        {{ ocultos() ? 'Mostrar valores' : 'Esconder valores' }}
+      </button>
+      <button type="button" class="botao-secundario" (click)="sair()">Sair</button>
+    </div>
+  } @else {
+    <nav class="topo__nav" aria-label="Principal"></nav>
+  }
 </header>
 
 <div class="avisos" role="status" aria-live="polite">

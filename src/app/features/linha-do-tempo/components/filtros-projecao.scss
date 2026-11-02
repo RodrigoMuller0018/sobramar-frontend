@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1) var(--espaco-2);
+}
+
+.campo {
+  display: grid;
+  flex: 1 1 10rem;
+  gap: 0.125rem;
+}
+
+label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+select {
+  min-height: 2.75rem;
+  width: 100%;
+}

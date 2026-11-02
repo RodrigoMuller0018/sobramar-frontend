@@ -1,0 +1,35 @@
+<div class="entrar">
+  <h1>Entrar</h1>
+
+  @if (etapa() === 'credenciais') {
+    <form [formGroup]="credenciais" (ngSubmit)="entrar()" novalidate>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="username" formControlName="email" />
+      </div>
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" autocomplete="current-password" formControlName="senha" />
+      </div>
+      <button type="submit" [disabled]="enviando()">Entrar</button>
+    </form>
+  } @else {
+    <form [formGroup]="segundoFator" (ngSubmit)="confirmar()" novalidate>
+      <div class="campo">
+        <label for="codigo">Código do aplicativo autenticador</label>
+        <input
+          id="codigo"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          maxlength="6"
+          formControlName="codigo"
+        />
+      </div>
+      <button type="submit" [disabled]="enviando()">Confirmar</button>
+    </form>
+  }
+
+  @if (erro(); as mensagem) {
+    <p class="texto-erro" role="alert">{{ mensagem }}</p>
+  }
+</div>

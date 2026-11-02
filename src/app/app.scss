@@ -19,23 +19,56 @@
 
 .topo,
 .rodape {
-  padding: var(--espaco-2);
+  padding: var(--espaco-1) var(--gutter);
   border-color: var(--cor-borda);
 }
 
 .topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-1) var(--espaco-2);
   border-bottom: 1px solid var(--cor-borda);
 }
 
-.topo__nav a.ativo {
-  font-weight: 700;
+.marca {
+  color: var(--cor-texto);
+  font: italic 400 1.75rem / 1 var(--fonte-titulo);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.topo__nav {
+  display: flex;
+  flex: 1;
+  gap: var(--espaco-2);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  a.ativo {
+    font-weight: 700;
+  }
+}
+
+.topo__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1);
+
+  button {
+    min-height: 2.75rem;
+  }
 }
 
 .avisos {
-  max-width: var(--largura-conteudo);
   width: 100%;
+  max-width: var(--largura-conteudo);
   margin: 0 auto;
-  padding: 0 var(--espaco-2);
+  padding: 0 var(--gutter);
 }
 
 .aviso {
@@ -59,10 +92,10 @@
 
 .conteudo {
   flex: 1;
-  max-width: var(--largura-conteudo);
   width: 100%;
+  max-width: var(--largura-conteudo);
   margin: 0 auto;
-  padding: var(--espaco-2);
+  padding: var(--espaco-2) var(--gutter);
 
   &:focus {
     outline: none;
@@ -76,5 +109,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--espaco-2);
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
   }
 }

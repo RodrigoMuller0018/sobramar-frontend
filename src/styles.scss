@@ -1,18 +1,46 @@
-// Tokens globais. Cores escolhidas com contraste de pelo menos 4.5:1 sobre o fundo (WCAG AA).
+// Tokens globais da direção "carta náutica". Texto e ações com contraste de pelo menos 4.5:1 (WCAG AA).
 :root {
-  --cor-fundo: #ffffff;
-  --cor-fundo-destaque: #f1f5f9;
-  --cor-texto: #1e293b; // 14.6:1
-  --cor-texto-suave: #475569; // 7.6:1
-  --cor-borda: #cbd5e1;
-  --cor-primaria: #1d4ed8; // 6.7:1
-  --cor-primaria-escura: #1e3a8a;
-  --cor-erro: #b91c1c; // 6.5:1
-  --cor-sucesso: #15803d; // 5.0:1
-  --cor-foco: #1d4ed8;
+  --cor-fundo: #eef3f1;
+  --cor-fundo-destaque: #e0e9e7;
+  --cor-texto: #13273b;
+  --cor-texto-suave: #456074;
+  --cor-borda: #c6d4d3;
+  --cor-primaria: #a80f72;
+  --cor-primaria-escura: #860a5a;
+  --cor-sobre-primaria: #ffffff;
+  --cor-erro: #a80f72;
+  --cor-sucesso: #1f6b4a;
+  --cor-foco: #a80f72;
+  --cor-terra: #e8d7a2;
+  --cor-terra-linha: #8f7a3c;
+  --cor-mare: #3f93b5;
+  --fonte-titulo: 'Libre Caslon Text', 'Iowan Old Style', Georgia, serif;
+  --fonte-corpo: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --fonte-dados: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
   --espaco-1: 0.5rem;
   --espaco-2: 1rem;
-  --largura-conteudo: 48rem;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --largura-conteudo: 90rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cor-fundo: #0b1a26;
+    --cor-fundo-destaque: #12293a;
+    --cor-texto: #dce8ea;
+    --cor-texto-suave: #9db6c2;
+    --cor-borda: #254459;
+    --cor-primaria: #f27cc6;
+    --cor-primaria-escura: #f7a3d8;
+    --cor-sobre-primaria: #0b1a26;
+    --cor-erro: #f27cc6;
+    --cor-sucesso: #7fd1a8;
+    --cor-foco: #f27cc6;
+    --cor-terra: #6d6134;
+    --cor-terra-linha: #c2b071;
+    --cor-mare: #4fa8cc;
+    color-scheme: dark;
+  }
 }
 
 *,
@@ -25,12 +53,7 @@ body {
   margin: 0;
   background: var(--cor-fundo);
   color: var(--cor-texto);
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
+  font-family: var(--fonte-corpo);
   line-height: 1.5;
 }
 
@@ -45,12 +68,21 @@ a {
 }
 
 input,
+select,
 button {
   font: inherit;
+  color: inherit;
 }
 
-input {
+.num {
+  font-family: var(--fonte-dados);
+  font-variant-numeric: tabular-nums;
+}
+
+input,
+select {
   padding: var(--espaco-1);
+  background: var(--cor-fundo);
   border: 1px solid var(--cor-texto-suave);
   border-radius: 4px;
 
@@ -64,7 +96,7 @@ button {
   border: 1px solid var(--cor-primaria);
   border-radius: 4px;
   background: var(--cor-primaria);
-  color: #ffffff;
+  color: var(--cor-sobre-primaria);
   cursor: pointer;
 
   &:hover {

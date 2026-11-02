@@ -12,10 +12,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     </p>
 
     <h2>Uso do serviço</h2>
-    <p>O serviço é oferecido como está, para organizar tarefas pessoais.</p>
+    <p>
+      O serviço é oferecido como está, para acompanhar quanto sobra em cada mês. Ele mostra contas e
+      cenários, e não recomenda investimentos nem movimenta dinheiro.
+    </p>
 
     <h2>Responsabilidades</h2>
-    <p>Você é responsável pelo conteúdo que cadastra. Não cadastre dados pessoais de terceiros.</p>
+    <p>Você é responsável pelo conteúdo que cadastra. Para outras pessoas, use só apelidos.</p>
   `,
 })
 export class Termos {}

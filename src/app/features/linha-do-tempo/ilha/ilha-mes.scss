@@ -1,0 +1,114 @@
+:host {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--espaco-1);
+  justify-items: start;
+  min-width: 0;
+}
+
+.palco {
+  position: relative;
+  width: 100%;
+  height: min(70vh, 44rem);
+  min-height: 22rem;
+  overflow: hidden;
+  border: 1px solid var(--cor-texto);
+  outline: 3px double var(--cor-texto);
+  outline-offset: -6px;
+  // A página continua rolando na vertical; o gesto lateral fica com a cena.
+  touch-action: pan-y;
+}
+
+@media (max-width: 620px) {
+  .palco {
+    height: 26rem;
+  }
+}
+
+.palco--sem-cena {
+  display: grid;
+  place-items: center;
+  height: auto;
+  min-height: 7rem;
+  padding: var(--espaco-2);
+}
+
+.cena {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.pontos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ponto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -1.375rem 0 0 -1.375rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  will-change: transform;
+
+  &:hover {
+    background: transparent;
+  }
+
+  i {
+    display: block;
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 2.5px solid #13273b;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgb(10 30 50 / 45%);
+    transition: transform 0.15s ease-out;
+  }
+
+  &:hover i,
+  &[aria-pressed='true'] i {
+    border-color: #a80f72;
+    transform: scale(1.35);
+  }
+}
+
+.ficha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--cor-texto);
+  background: var(--cor-fundo);
+  font: 500 0.875rem var(--fonte-dados);
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgb(10 30 50 / 22%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.aviso-cena {
+  max-width: 40ch;
+  margin: 0;
+  text-align: center;
+}
+
+.alternar {
+  min-height: 2.75rem;
+}

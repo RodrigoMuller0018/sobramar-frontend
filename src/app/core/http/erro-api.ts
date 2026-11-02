@@ -9,10 +9,12 @@ export interface ErroApi {
 
 /** Textos amigáveis para os `codigo` estáveis do contrato de erro (Problem Details) do backend. */
 const MENSAGENS_POR_CODIGO: Readonly<Record<string, string>> = {
-  TAREFA_NAO_ENCONTRADA: 'Essa tarefa não existe mais. Atualize a lista.',
-  TAREFA_JA_CONCLUIDA: 'Essa tarefa já estava concluída.',
-  TITULO_OBRIGATORIO: 'Informe o título da tarefa.',
-  TITULO_MUITO_LONGO: 'Use no máximo 200 caracteres.',
+  CREDENCIAIS_INVALIDAS: 'E-mail, senha ou código incorretos.',
+  MUITAS_TENTATIVAS: 'Muitas tentativas. Aguarde alguns minutos e tente de novo.',
+  NAO_AUTENTICADO: 'Sua sessão terminou. Entre de novo.',
+  ACESSO_NEGADO: 'Não foi possível confirmar esta ação. Recarregue a página e tente de novo.',
+  PERIODO_INVALIDO: 'Esse período não pode ser mostrado.',
+  RECURSO_NAO_ENCONTRADO: 'Isso não existe mais. Atualize a tela.',
 };
 
 const SEM_CONEXAO = 'Não foi possível falar com o servidor. Verifique sua conexão.';

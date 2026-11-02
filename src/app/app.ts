@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { SessaoService } from './core/autenticacao/sessao.service';
 import { NotificacaoService } from './core/notificacao/notificacao.service';
+import { ValoresVisiveisService } from './core/preferencias/valores-visiveis.service';
 
 /** Shell da aplicação: navegação, região de avisos, conteúdo e rodapé com os links legais. */
 @Component({
@@ -12,9 +14,14 @@ import { NotificacaoService } from './core/notificacao/notificacao.service';
 })
 export class App {
   private readonly notificacaoService = inject(NotificacaoService);
+  private readonly sessao = inject(SessaoService);
+  private readonly router = inject(Router);
+  private readonly valores = inject(ValoresVisiveisService);
   private readonly conteudo = viewChild.required<ElementRef<HTMLElement>>('conteudo');
 
   protected readonly notificacao = this.notificacaoService.atual;
+  protected readonly usuario = this.sessao.usuario;
+  protected readonly ocultos = this.valores.ocultos;
 
   /** Com o router, `href="#conteudo"` recarregaria a raiz; então o foco é movido à mão. */
   protected pularParaConteudo(evento: Event): void {
@@ -24,5 +31,16 @@ export class App {
 
   protected fecharAviso(): void {
     this.notificacaoService.limpar();
+  }
+
+  protected alternarValores(): void {
+    this.valores.alternar();
+  }
+
+  protected sair(): void {
+    this.sessao.sair().subscribe({
+      next: () => void this.router.navigateByUrl('/entrar'),
+      error: () => void this.router.navigateByUrl('/entrar'),
+    });
   }
 }
