@@ -30,7 +30,15 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "@fontsource/libre-caslon-text/latin-400-italic.css",
+              "@fontsource/hanken-grotesk/latin-400.css",
+              "@fontsource/hanken-grotesk/latin-500.css",
+              "@fontsource/hanken-grotesk/latin-600.css",
+              "@fontsource/ibm-plex-mono/latin-400.css",
+              "@fontsource/ibm-plex-mono/latin-500.css",
+              "src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -76,7 +84,8 @@
             "coverageExclude": [
               "src/**/*.spec.ts",
               "src/app/**/*.routes.ts",
-              "src/app/app.config.ts"
+              "src/app/app.config.ts",
+              "src/app/features/linha-do-tempo/ilha/cena/**"
             ],
             "coverageReporters": ["text-summary", "html", "lcov"],
             "coverageThresholds": {

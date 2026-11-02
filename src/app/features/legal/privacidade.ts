@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
- * Modelo de política de privacidade (item 1 do checklist de Conformidade Web e LGPD).
- * Ajuste ao que o projeto realmente coleta antes de publicar.
+ * Rascunho coerente com o que o app coleta na Entrega A (item 1 do checklist de Conformidade Web e
+ * LGPD). A etapa A9 revisa o texto, e a abertura ao público exige revisão profissional.
  */
 @Component({
   selector: 'app-privacidade',
@@ -10,21 +10,26 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <h1>Política de privacidade</h1>
     <p class="aviso-modelo">
-      Texto-modelo. Revise antes de publicar e, se o projeto tiver usuários reais, valide com um
-      profissional.
+      Rascunho para uso pessoal. Ainda não foi revisado por um profissional.
     </p>
 
     <h2>Quais dados coletamos</h2>
     <p>
-      Só o título das tarefas que você cadastra. Não pedimos nome, e-mail, CPF ou qualquer outro
-      dado pessoal, e não usamos cookies de rastreamento ou analytics.
+      O e-mail da conta e o que você cadastra: receitas, compromissos, carteiras, cartões,
+      categorias e apelidos de pessoas. Não pedimos CPF nem senha de banco, e não usamos analytics.
+    </p>
+
+    <h2>Cookies e armazenamento</h2>
+    <p>
+      Usamos só os cookies necessários para manter a sessão e proteger os envios. Duas preferências
+      suas (esconder valores e ver sem 3D) ficam neste navegador.
     </p>
 
     <h2>Para que usamos</h2>
-    <p>Para listar e organizar suas tarefas. Os dados não são vendidos nem compartilhados.</p>
+    <p>Para calcular quanto sobra em cada mês. Os dados não são vendidos nem compartilhados.</p>
 
     <h2>Por quanto tempo guardamos</h2>
-    <p>Enquanto a tarefa existir. Você pode pedir a exclusão a qualquer momento.</p>
+    <p>Enquanto a conta existir. A exclusão da conta chega na próxima etapa do projeto.</p>
 
     <h2>Seus direitos (LGPD)</h2>
     <p>

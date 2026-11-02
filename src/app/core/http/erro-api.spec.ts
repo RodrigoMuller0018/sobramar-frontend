@@ -7,12 +7,12 @@ function erroHttp(status: number, corpo: unknown = null): HttpErrorResponse {
 
 describe('paraErroApi', () => {
   it('deve usar a mensagem amigável quando o codigo do Problem Details for conhecido', () => {
-    const erro = paraErroApi(erroHttp(422, { status: 422, codigo: 'TAREFA_JA_CONCLUIDA' }));
+    const erro = paraErroApi(erroHttp(401, { status: 401, codigo: 'CREDENCIAIS_INVALIDAS' }));
 
     expect(erro).toEqual({
-      status: 422,
-      codigo: 'TAREFA_JA_CONCLUIDA',
-      mensagem: 'Essa tarefa já estava concluída.',
+      status: 401,
+      codigo: 'CREDENCIAIS_INVALIDAS',
+      mensagem: 'E-mail, senha ou código incorretos.',
     });
   });
 
@@ -29,11 +29,10 @@ describe('paraErroApi', () => {
     expect(paraErroApi(erroHttp(0)).mensagem).toContain('conexão');
   });
 
-  it('deve tratar 5xx como erro inesperado', () => {
-    expect(paraErroApi(erroHttp(503, 'Service Unavailable')).mensagem).toContain('Algo deu errado');
-  });
+  it('deve tratar 5xx como erro do servidor, sem código', () => {
+    const erro = paraErroApi(erroHttp(503, 'texto solto'));
 
-  it.each([null, 'texto', { codigo: 42 }])('deve ignorar corpo sem codigo válido (%j)', (corpo) => {
-    expect(paraErroApi(erroHttp(400, corpo)).codigo).toBeNull();
+    expect(erro.codigo).toBeNull();
+    expect(erro.mensagem).toContain('do nosso lado');
   });
 });

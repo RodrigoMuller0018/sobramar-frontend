@@ -1,0 +1,42 @@
+<div #palco class="palco" [class.palco--sem-cena]="semCena()">
+  <canvas #cena class="cena" [hidden]="semCena()" aria-hidden="true"></canvas>
+
+  <div #camada class="pontos" [hidden]="semCena()">
+    @for (ponto of pontos(); track ponto.id) {
+      <button
+        type="button"
+        class="ponto"
+        [attr.data-lugar]="ponto.id"
+        [attr.aria-label]="ponto.rotulo"
+        [attr.aria-pressed]="selecionado() === ponto.id"
+        (click)="tocar(ponto.id)"
+      >
+        <i></i>
+      </button>
+    }
+  </div>
+
+  @if (!semCena() && fichaAtual(); as atual) {
+    <div #ficha class="ficha" aria-hidden="true">{{ atual.rotulo }}</div>
+  }
+
+  @if (semCena()) {
+    <p class="aviso-cena">
+      @if (falhou()) {
+        Este aparelho não abriu a cena 3D. Os números do mês continuam aqui na tela.
+      } @else {
+        A cena 3D está desligada. Os números do mês continuam aqui na tela.
+      }
+    </p>
+  }
+</div>
+@if (!falhou()) {
+  <button
+    type="button"
+    class="botao-secundario alternar"
+    [attr.aria-pressed]="!usar3d()"
+    (click)="alternar()"
+  >
+    {{ usar3d() ? 'Ver sem 3D' : 'Ver em 3D' }}
+  </button>
+}

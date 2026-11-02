@@ -1,0 +1,31 @@
+.entrar {
+  display: grid;
+  gap: var(--espaco-2);
+  max-width: 24rem;
+  margin: calc(var(--espaco-2) * 2) auto;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+form {
+  display: grid;
+  gap: var(--espaco-2);
+}
+
+.campo {
+  display: grid;
+  gap: 0.25rem;
+}
+
+label {
+  font-weight: 500;
+}
+
+input,
+button {
+  min-height: 2.75rem;
+  width: 100%;
+}

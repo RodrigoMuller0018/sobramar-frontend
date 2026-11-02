@@ -1,0 +1,69 @@
+<div class="cabecalho">
+  <h1>{{ titulo() }}</h1>
+  <nav class="setas" aria-label="Trocar de mês">
+    <a class="seta" [routerLink]="['/mes', anterior()]" aria-label="Mês anterior">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M15 5l-7 7 7 7" />
+      </svg>
+    </a>
+    <a class="seta" [routerLink]="['/mes', seguinte()]" aria-label="Próximo mês">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </nav>
+</div>
+
+@if (store.erro(); as mensagem) {
+  <div class="estado">
+    <p class="texto-erro">{{ mensagem }}</p>
+    <button type="button" (click)="store.tentarDeNovo()">Tentar de novo</button>
+  </div>
+} @else if (dados(); as ilha) {
+  <div class="corpo">
+    <div class="principal">
+      <div class="placar" aria-live="polite">
+        <span>{{ sobra() < 0 ? 'Faltam' : 'Sobram' }}</span>
+        <strong><app-valor [centavos]="sobra() < 0 ? -sobra() : sobra()" /></strong>
+      </div>
+      <app-ilha-mes
+        [dados]="ilha"
+        [selecionado]="selecionado()"
+        (selecionar)="selecionar($event)"
+        (deslizar)="deslizar($event)"
+      />
+      <app-calendario-meses [meses]="store.meses()" [atual]="competencia()" />
+    </div>
+    <div class="lateral">
+      <app-filtros-projecao
+        [filtros]="store.filtros()"
+        [pessoas]="store.pessoas()"
+        [categorias]="store.categorias()"
+        (mudou)="store.aplicarFiltros($event)"
+      />
+      @if (mes(); as detalhe) {
+        <app-resumo-mes [mes]="detalhe" [destaque]="selecionado()" />
+      }
+    </div>
+  </div>
+} @else if (store.carregando()) {
+  <p class="estado">Carregando o mês…</p>
+} @else {
+  <p class="estado">Este mês não está disponível.</p>
+}

@@ -1,0 +1,83 @@
+<section aria-labelledby="titulo-numeros">
+  <h2 id="titulo-numeros">O mês em números</h2>
+  <dl class="resumo">
+    <dt>Receitas</dt>
+    <dd><app-valor [centavos]="mes().receitasCentavos" /></dd>
+    <dt>Compromissos</dt>
+    <dd><app-valor [centavos]="mes().compromissosCentavos" /></dd>
+    <dt class="total">{{ sobra() < 0 ? 'Falta' : 'Sobra' }}</dt>
+    <dd class="total"><app-valor [centavos]="sobra() < 0 ? -sobra() : sobra()" /></dd>
+  </dl>
+  @if (mes().contemEstimativa) {
+    <p class="nota">Este mês inclui valores estimados.</p>
+  }
+
+  <div class="rolagem" role="region" aria-labelledby="titulo-itens" tabindex="0">
+    <table>
+      <caption id="titulo-itens">
+        Itens do mês
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Parcela</th>
+          <th scope="col">Vencimento</th>
+          <th scope="col">Situação</th>
+          <th scope="col" class="direita">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (linha of linhas(); track linha.chave) {
+          <tr [class.destacada]="linha.destacada" [class.ignorada]="linha.item.ignorada">
+            <th scope="row">{{ linha.item.descricao }}</th>
+            <td>{{ linha.parcela }}</td>
+            <td class="num">{{ linha.vencimento }}</td>
+            <td>{{ linha.situacao }}</td>
+            <td class="direita">
+              @if (linha.item.natureza === 'ENTRADA') {
+                <span aria-hidden="true">+ </span>
+              }
+              <app-valor [centavos]="linha.item.valorCentavos" />
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5">Nada neste mês.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (faturas().length) {
+    <h3>Faturas</h3>
+    <ul class="lista">
+      @for (fatura of faturas(); track fatura.cartaoId) {
+        <li>
+          <span
+            >{{ fatura.nomeCartao }}, vence em {{ fatura.data
+            }}{{ fatura.paga ? ', paga' : '' }}</span
+          >
+          <app-valor [centavos]="fatura.totalCentavos" />
+        </li>
+      }
+    </ul>
+  }
+
+  @if (mes().vale.length) {
+    <h3>Vale</h3>
+    <p class="nota">O vale fica fora da sobra.</p>
+    <ul class="lista">
+      @for (vale of mes().vale; track vale.carteiraId) {
+        <li>
+          <span>{{ vale.nome }}: crédito</span>
+          <app-valor [centavos]="vale.creditosCentavos" />
+        </li>
+        <li>
+          <span>{{ vale.nome }}: gasto</span>
+          <app-valor [centavos]="vale.gastosCentavos" />
+        </li>
+      }
+    </ul>
+  }
+</section>
