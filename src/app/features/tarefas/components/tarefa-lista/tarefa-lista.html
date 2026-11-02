@@ -1,0 +1,23 @@
+@if (tarefas().length) {
+  <ul class="lista">
+    @for (tarefa of tarefas(); track tarefa.id) {
+      <li class="lista__item" [class.lista__item--concluida]="tarefa.concluida">
+        <span class="lista__titulo">{{ tarefa.titulo }}</span>
+        @if (tarefa.concluida) {
+          <span class="lista__selo">Concluída</span>
+        } @else {
+          <button
+            type="button"
+            class="botao-secundario"
+            [attr.aria-label]="'Concluir: ' + tarefa.titulo"
+            (click)="concluir.emit(tarefa.id)"
+          >
+            Concluir
+          </button>
+        }
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Nenhuma tarefa por enquanto. Crie a primeira acima.</p>
+}

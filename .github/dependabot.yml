@@ -1,0 +1,41 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # Pacotes do Angular precisam subir juntos (mesma versão)
+      angular:
+        patterns: ['@angular/*', '@angular-devkit/*', 'angular-eslint', '@angular-eslint/*']
+      qualidade:
+        patterns:
+          [
+            'eslint',
+            '@eslint/*',
+            'typescript-eslint',
+            'prettier',
+            'vitest',
+            '@vitest/*',
+            'axe-core',
+            'jsdom',
+          ]
+    ignore:
+      # Major do Angular se faz com `ng update`, que aplica as migrações de código
+      - dependency-name: '@angular/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@angular-devkit/*'
+        update-types: ['version-update:semver-major']
+      # O Angular fixa a faixa do TypeScript; ela sobe junto com o `ng update`
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+    commit-message:
+      prefix: 'chore(deps)'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(ci)'

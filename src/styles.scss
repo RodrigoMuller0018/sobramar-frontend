@@ -1,0 +1,109 @@
+// Tokens globais. Cores escolhidas com contraste de pelo menos 4.5:1 sobre o fundo (WCAG AA).
+:root {
+  --cor-fundo: #ffffff;
+  --cor-fundo-destaque: #f1f5f9;
+  --cor-texto: #1e293b; // 14.6:1
+  --cor-texto-suave: #475569; // 7.6:1
+  --cor-borda: #cbd5e1;
+  --cor-primaria: #1d4ed8; // 6.7:1
+  --cor-primaria-escura: #1e3a8a;
+  --cor-erro: #b91c1c; // 6.5:1
+  --cor-sucesso: #15803d; // 5.0:1
+  --cor-foco: #1d4ed8;
+  --espaco-1: 0.5rem;
+  --espaco-2: 1rem;
+  --largura-conteudo: 48rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--cor-primaria);
+}
+
+// Foco sempre visível para quem navega por teclado (item 11 do checklist).
+:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+input {
+  padding: var(--espaco-1);
+  border: 1px solid var(--cor-texto-suave);
+  border-radius: 4px;
+
+  &[aria-invalid='true'] {
+    border-color: var(--cor-erro);
+  }
+}
+
+button {
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 1px solid var(--cor-primaria);
+  border-radius: 4px;
+  background: var(--cor-primaria);
+  color: #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cor-primaria-escura);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.botao-secundario {
+  background: transparent;
+  color: var(--cor-primaria);
+
+  &:hover {
+    background: var(--cor-fundo-destaque);
+  }
+}
+
+.secao {
+  margin-top: calc(var(--espaco-2) * 2);
+}
+
+.texto-erro {
+  color: var(--cor-erro);
+  font-weight: 600;
+}
+
+.aviso-modelo {
+  padding: var(--espaco-1) var(--espaco-2);
+  border-left: 4px solid var(--cor-erro);
+  background: var(--cor-fundo-destaque);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

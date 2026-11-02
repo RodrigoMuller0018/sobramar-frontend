@@ -1,0 +1,80 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pular {
+  position: absolute;
+  top: var(--espaco-1);
+  left: var(--espaco-1);
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-fundo);
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
+}
+
+.topo,
+.rodape {
+  padding: var(--espaco-2);
+  border-color: var(--cor-borda);
+}
+
+.topo {
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.topo__nav a.ativo {
+  font-weight: 700;
+}
+
+.avisos {
+  max-width: var(--largura-conteudo);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--espaco-2);
+}
+
+.aviso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  margin-top: var(--espaco-2);
+  padding: var(--espaco-1) var(--espaco-2);
+  border-left: 4px solid var(--cor-sucesso);
+  background: var(--cor-fundo-destaque);
+
+  p {
+    margin: 0;
+  }
+}
+
+.aviso--erro {
+  border-left-color: var(--cor-erro);
+}
+
+.conteudo {
+  flex: 1;
+  max-width: var(--largura-conteudo);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--espaco-2);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.rodape {
+  border-top: 1px solid var(--cor-borda);
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-2);
+  }
+}

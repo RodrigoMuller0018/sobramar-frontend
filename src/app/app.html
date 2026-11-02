@@ -1,0 +1,27 @@
+<a class="pular" href="#conteudo" (click)="pularParaConteudo($event)">Pular para o conteúdo</a>
+
+<header class="topo">
+  <nav class="topo__nav" aria-label="Principal">
+    <a routerLink="/tarefas" routerLinkActive="ativo" ariaCurrentWhenActive="page">Tarefas</a>
+  </nav>
+</header>
+
+<div class="avisos" role="status" aria-live="polite">
+  @if (notificacao(); as aviso) {
+    <div class="aviso" [class.aviso--erro]="aviso.tipo === 'erro'">
+      <p>{{ aviso.texto }}</p>
+      <button type="button" class="botao-secundario" (click)="fecharAviso()">Fechar aviso</button>
+    </div>
+  }
+</div>
+
+<main id="conteudo" #conteudo class="conteudo" tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="rodape">
+  <nav aria-label="Informações legais">
+    <a routerLink="/privacidade">Política de privacidade</a>
+    <a routerLink="/termos">Termos de uso</a>
+  </nav>
+</footer>
