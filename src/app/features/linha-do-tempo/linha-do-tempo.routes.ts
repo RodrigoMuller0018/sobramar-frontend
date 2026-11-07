@@ -24,6 +24,11 @@ export const LINHA_DO_TEMPO_ROUTES: Routes = [
         title: 'Ano',
         loadComponent: () => import('./pages/ano-page').then((m) => m.AnoPage),
       },
+      {
+        path: 'comecar',
+        title: 'Montar meu carnê',
+        loadComponent: () => import('../comecar/comecar-page').then((m) => m.ComecarPage),
+      },
     ],
   },
 ];

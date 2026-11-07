@@ -19,6 +19,9 @@
         {{ ocultos() ? 'Mostrar valores' : 'Esconder valores' }}
       </button>
       <button type="button" class="botao-secundario" (click)="sair()">Sair</button>
+      <button type="button" class="botao-secundario" (click)="alternarModo()">
+        {{ modo() === 'lista' ? 'Ver a cena do mês' : 'Ver como lista' }}
+      </button>
     </div>
   } @else {
     <nav class="topo__nav" aria-label="Principal"></nav>

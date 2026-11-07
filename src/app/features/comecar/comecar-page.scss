@@ -1,0 +1,81 @@
+.comecar {
+  max-width: 60rem;
+}
+
+h1 {
+  margin: 0 0 var(--espaco-1);
+  font: italic 400 clamp(2rem, 4.5vw, 3rem) / 1.05 var(--fonte-titulo);
+  letter-spacing: -0.02em;
+}
+
+.intro {
+  max-width: 65ch;
+  margin: 0 0 var(--espaco-2);
+}
+
+fieldset {
+  margin: 0 0 var(--espaco-2);
+  padding: var(--espaco-2);
+  border: 1px solid var(--cor-borda);
+}
+
+legend {
+  padding: 0 var(--espaco-1);
+  font: 400 1.25rem / 1.2 var(--fonte-titulo);
+}
+
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--espaco-1) var(--espaco-2);
+  margin-bottom: var(--espaco-2);
+}
+
+.campo {
+  display: flex;
+  flex: 1 1 14rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+
+  input {
+    min-height: 2.75rem;
+  }
+}
+
+.campo--curto {
+  flex: 0 1 9rem;
+}
+
+.campo--opcao {
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--espaco-1);
+  min-height: 2.75rem;
+
+  input {
+    width: 1.25rem;
+    height: 1.25rem;
+    min-height: 0;
+  }
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+
+button {
+  min-height: 2.75rem;
+}
+
+@media (max-width: 600px) {
+  .campo,
+  .campo--curto {
+    flex-basis: 100%;
+  }
+}

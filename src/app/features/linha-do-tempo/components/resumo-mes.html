@@ -8,8 +8,12 @@
     <dt class="total">{{ sobra() < 0 ? 'Falta' : 'Sobra' }}</dt>
     <dd class="total"><app-valor [centavos]="sobra() < 0 ? -sobra() : sobra()" /></dd>
   </dl>
-  @if (mes().contemEstimativa) {
-    <p class="nota">Este mês inclui valores estimados.</p>
+  @if (mes().confianca === 'FIRME') {
+    <p class="nota">Sobra firme: tudo certo e conciliado com o banco.</p>
+  } @else if (mes().contemEstimativa) {
+    <p class="nota">Sobra estimada: este mês inclui valores estimados.</p>
+  } @else {
+    <p class="nota">Sobra estimada: falta conciliar a fatura com o banco.</p>
   }
 
   <div class="rolagem" role="region" aria-labelledby="titulo-itens" tabindex="0">
@@ -55,8 +59,8 @@
       @for (fatura of faturas(); track fatura.cartaoId) {
         <li>
           <span
-            >{{ fatura.nomeCartao }}, vence em {{ fatura.data
-            }}{{ fatura.paga ? ', paga' : '' }}</span
+            >{{ fatura.nomeCartao }}, vence em {{ fatura.data }}{{ fatura.paga ? ', paga' : '' }},
+            {{ fatura.conciliacao }}</span
           >
           <app-valor [centavos]="fatura.totalCentavos" />
         </li>

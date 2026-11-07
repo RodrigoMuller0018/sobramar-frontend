@@ -16,7 +16,8 @@ describe('páginas da linha do tempo', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
-    api.projetar.mockReturnValue(of({ meses: [MAIO] }));
+    localStorage.setItem('sobramar.modo-de-leitura', 'cena');
+    api.projetar.mockReturnValue(of({ atualizadoEm: null, meses: [MAIO] }));
     api.pessoas.mockReturnValue(of([]));
     api.categorias.mockReturnValue(of([]));
     TestBed.configureTestingModule({

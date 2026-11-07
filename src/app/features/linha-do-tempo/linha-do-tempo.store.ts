@@ -15,6 +15,7 @@ export class LinhaDoTempoStore {
   private janela: { de: string; ate: string } | null = null;
 
   readonly meses = signal<readonly MesProjetado[]>([]);
+  readonly atualizadoEm = signal<string | null>(null);
   readonly carregando = signal(true);
   readonly erro = signal<string | null>(null);
   readonly filtros = signal<Filtros>(SEM_FILTROS);
@@ -32,7 +33,10 @@ export class LinhaDoTempoStore {
         }),
         switchMap(({ de, ate, filtros }) =>
           this.api.projetar(de, ate, filtros).pipe(
-            tap(({ meses }) => this.meses.set(meses)),
+            tap(({ meses, atualizadoEm }) => {
+              this.meses.set(meses);
+              this.atualizadoEm.set(atualizadoEm ?? null);
+            }),
             catchError((erro: ErroApi) => {
               this.erro.set(erro.mensagem);
               return of(null);

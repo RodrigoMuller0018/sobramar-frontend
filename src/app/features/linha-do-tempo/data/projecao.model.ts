@@ -1,6 +1,8 @@
 export type Natureza = 'ENTRADA' | 'SAIDA';
 export type Certeza = 'CERTO' | 'ESTIMADO';
 export type Situacao = 'PREVISTO' | 'REALIZADO';
+/** FIRME só quando tudo é certo e conciliado; ESTIMADA é a sobra a lápis. */
+export type Confianca = 'FIRME' | 'ESTIMADA';
 
 export interface ItemProjetado {
   readonly compromissoId: string | null;
@@ -26,6 +28,11 @@ export interface FaturaProjetada {
   readonly vencimento: string;
   readonly totalCentavos: number;
   readonly paga: boolean;
+  /** O total que o banco cobrou, quando informado; nulo se não. */
+  readonly informadoCentavos: number | null;
+  /** Informado menos calculado: o "falta explicar". */
+  readonly diferencaCentavos: number | null;
+  readonly conciliada: boolean;
 }
 
 export interface ValeProjetado {
@@ -41,12 +48,15 @@ export interface MesProjetado {
   readonly compromissosCentavos: number;
   readonly sobraCentavos: number;
   readonly contemEstimativa: boolean;
+  readonly confianca: Confianca;
   readonly faturas: readonly FaturaProjetada[];
   readonly itens: readonly ItemProjetado[];
   readonly vale: readonly ValeProjetado[];
 }
 
 export interface Projecao {
+  /** Quando os dados mudaram pela última vez; nulo em conta vazia. */
+  readonly atualizadoEm: string | null;
   readonly meses: readonly MesProjetado[];
 }
 

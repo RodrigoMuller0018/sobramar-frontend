@@ -55,6 +55,10 @@ h1 {
   gap: var(--espaco-1);
 }
 
+.corpo--lista {
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+}
+
 .placar {
   display: flex;
   align-items: baseline;
@@ -65,6 +69,57 @@ h1 {
     font: 500 clamp(1.5rem, 3.4vw, 2.25rem) / 1.2 var(--fonte-dados);
     letter-spacing: -0.02em;
   }
+}
+
+// A sobra a lápis: grafite enquanto houver estimativa ou fatura sem conciliar; a palavra diz o mesmo.
+.placar--estimada strong {
+  color: var(--cor-texto-suave);
+}
+
+.placar__confianca {
+  color: var(--cor-texto-suave);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.atualizado {
+  margin: 0;
+  color: var(--cor-texto-suave);
+  font-size: 0.875rem;
+}
+
+.escolha,
+.vazio {
+  margin-bottom: var(--espaco-2);
+  padding: var(--espaco-2);
+  border: 1px solid var(--cor-borda);
+
+  h2 {
+    margin: 0 0 var(--espaco-1);
+    font: 400 1.25rem / 1.2 var(--fonte-titulo);
+  }
+
+  p {
+    max-width: 65ch;
+    margin: 0 0 var(--espaco-2);
+  }
+}
+
+.escolha__botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1);
+}
+
+.botao {
+  display: inline-block;
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 1px solid var(--cor-primaria);
+  border-radius: 4px;
+  background: var(--cor-primaria);
+  color: var(--cor-sobre-primaria);
+  text-decoration: none;
 }
 
 .estado {
