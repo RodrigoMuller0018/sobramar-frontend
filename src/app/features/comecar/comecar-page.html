@@ -1,0 +1,170 @@
+<div class="comecar">
+  <h1>Montar meu carnê</h1>
+  <p class="intro">
+    Conte o mínimo: quanto entra, o cartão e o que já está parcelado. A sobra de cada mês aparece em
+    seguida, a lápis até bater com a fatura do banco. Nada aqui pede senha de banco nem move
+    dinheiro.
+  </p>
+
+  <form [formGroup]="formulario" (ngSubmit)="montar()" novalidate>
+    <fieldset formGroupName="renda">
+      <legend>1. Quanto entra</legend>
+      <div class="linha">
+        <div class="campo">
+          <label for="renda-valor">Renda líquida por mês (R$)</label>
+          <input
+            id="renda-valor"
+            inputmode="decimal"
+            formControlName="valor"
+            placeholder="5.000,00"
+          />
+        </div>
+        <div class="campo campo--curto">
+          <label for="renda-dia">Dia do pagamento</label>
+          <input id="renda-dia" type="number" min="1" max="31" formControlName="dia" />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset formGroupName="cartao">
+      <legend>2. Cartão de crédito</legend>
+      <div class="campo campo--opcao">
+        <input id="cartao-tem" type="checkbox" formControlName="tem" />
+        <label for="cartao-tem">Tenho um cartão com parcelas</label>
+      </div>
+      @if (formulario.controls.cartao.controls.tem.value) {
+        <div class="linha">
+          <div class="campo">
+            <label for="cartao-nome">Nome do cartão</label>
+            <input id="cartao-nome" formControlName="nome" />
+          </div>
+          <div class="campo campo--curto">
+            <label for="cartao-fechamento">Dia do fechamento</label>
+            <input
+              id="cartao-fechamento"
+              type="number"
+              min="1"
+              max="31"
+              formControlName="fechamento"
+            />
+          </div>
+          <div class="campo campo--curto">
+            <label for="cartao-vencimento">Dia do vencimento</label>
+            <input
+              id="cartao-vencimento"
+              type="number"
+              min="1"
+              max="31"
+              formControlName="vencimento"
+            />
+          </div>
+        </div>
+      }
+    </fieldset>
+
+    <fieldset formArrayName="contas">
+      <legend>3. Contas de todo mês</legend>
+      @for (conta of contas.controls; track conta; let i = $index) {
+        <div class="linha" [formGroupName]="i">
+          <div class="campo">
+            <label [for]="'conta-' + i + '-descricao'">Conta</label>
+            <input [id]="'conta-' + i + '-descricao'" formControlName="descricao" />
+          </div>
+          <div class="campo campo--curto">
+            <label [for]="'conta-' + i + '-valor'">Valor (R$)</label>
+            <input [id]="'conta-' + i + '-valor'" inputmode="decimal" formControlName="valor" />
+          </div>
+          <div class="campo campo--curto">
+            <label [for]="'conta-' + i + '-dia'">Dia</label>
+            <input
+              [id]="'conta-' + i + '-dia'"
+              type="number"
+              min="1"
+              max="31"
+              formControlName="dia"
+            />
+          </div>
+          <div class="campo campo--opcao">
+            <input [id]="'conta-' + i + '-estimada'" type="checkbox" formControlName="estimada" />
+            <label [for]="'conta-' + i + '-estimada'">Valor varia</label>
+          </div>
+          <button type="button" class="botao-secundario" (click)="removerConta(i)">
+            Tirar {{ conta.controls.descricao.value || 'conta' }}
+          </button>
+        </div>
+      }
+      <button type="button" class="botao-secundario" (click)="adicionarConta()">
+        Adicionar outra conta
+      </button>
+    </fieldset>
+
+    <fieldset formArrayName="parcelas">
+      <legend>4. Parcelas em andamento</legend>
+      @for (parcela of parcelas.controls; track parcela; let i = $index) {
+        <div class="linha" [formGroupName]="i">
+          <div class="campo">
+            <label [for]="'parcela-' + i + '-descricao'">O que foi comprado</label>
+            <input [id]="'parcela-' + i + '-descricao'" formControlName="descricao" />
+          </div>
+          <div class="campo campo--curto">
+            <label [for]="'parcela-' + i + '-valor'">Valor da parcela (R$)</label>
+            <input
+              [id]="'parcela-' + i + '-valor'"
+              inputmode="decimal"
+              formControlName="valorParcela"
+            />
+          </div>
+          <div class="campo campo--curto">
+            <label [for]="'parcela-' + i + '-atual'">Parcela atual</label>
+            <input [id]="'parcela-' + i + '-atual'" type="number" min="1" formControlName="atual" />
+          </div>
+          <div class="campo campo--curto">
+            <label [for]="'parcela-' + i + '-total'">De quantas</label>
+            <input
+              [id]="'parcela-' + i + '-total'"
+              type="number"
+              min="1"
+              max="120"
+              formControlName="total"
+            />
+          </div>
+          @if (formulario.controls.cartao.controls.tem.value) {
+            <div class="campo campo--opcao">
+              <input [id]="'parcela-' + i + '-cartao'" type="checkbox" formControlName="noCartao" />
+              <label [for]="'parcela-' + i + '-cartao'">No cartão</label>
+            </div>
+          }
+          @if (!formulario.controls.cartao.controls.tem.value || !parcela.controls.noCartao.value) {
+            <div class="campo campo--curto">
+              <label [for]="'parcela-' + i + '-dia'">Dia do boleto</label>
+              <input
+                [id]="'parcela-' + i + '-dia'"
+                type="number"
+                min="1"
+                max="31"
+                formControlName="dia"
+              />
+            </div>
+          }
+          <button type="button" class="botao-secundario" (click)="removerParcela(i)">
+            Tirar {{ parcela.controls.descricao.value || 'parcela' }}
+          </button>
+        </div>
+      }
+      <button type="button" class="botao-secundario" (click)="adicionarParcela()">
+        Adicionar outra parcela
+      </button>
+    </fieldset>
+
+    @if (erro(); as mensagem) {
+      <p class="texto-erro" role="alert">{{ mensagem }}</p>
+    }
+
+    <div class="acoes">
+      <button type="submit" [disabled]="enviando()">
+        {{ enviando() ? 'Montando…' : 'Montar o carnê' }}
+      </button>
+      <a routerLink="/">Deixar para depois</a>
+    </div>
+  </form>
+</div>

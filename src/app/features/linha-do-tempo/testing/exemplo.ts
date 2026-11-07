@@ -28,6 +28,7 @@ export const MAIO: MesProjetado = {
   compromissosCentavos: 231990,
   sobraCentavos: 268010,
   contemEstimativa: true,
+  confianca: 'ESTIMADA',
   faturas: [
     {
       cartaoId: 'k1',
@@ -35,6 +36,9 @@ export const MAIO: MesProjetado = {
       vencimento: '2027-05-05',
       totalCentavos: 53990,
       paga: false,
+      informadoCentavos: null,
+      diferencaCentavos: null,
+      conciliada: false,
     },
   ],
   itens: [

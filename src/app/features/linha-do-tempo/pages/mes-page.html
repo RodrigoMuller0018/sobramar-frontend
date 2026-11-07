@@ -30,24 +30,54 @@
   </nav>
 </div>
 
+@if (!escolhido()) {
+  <section class="escolha" aria-labelledby="titulo-escolha">
+    <h2 id="titulo-escolha">Como você quer ler o mês?</h2>
+    <p>
+      A lista mostra tudo em tabela, funciona só com teclado e com leitor de tela. A cena desenha o
+      mês. Dá para trocar a qualquer momento, no topo da página.
+    </p>
+    <div class="escolha__botoes">
+      <button type="button" (click)="escolher('lista')">Lista simples</button>
+      <button type="button" class="botao-secundario" (click)="escolher('cena')">Cena do mês</button>
+    </div>
+  </section>
+}
+
 @if (store.erro(); as mensagem) {
   <div class="estado">
     <p class="texto-erro">{{ mensagem }}</p>
     <button type="button" (click)="store.tentarDeNovo()">Tentar de novo</button>
   </div>
 } @else if (dados(); as ilha) {
-  <div class="corpo">
+  @if (vazio()) {
+    <section class="vazio" aria-labelledby="titulo-vazio">
+      <h2 id="titulo-vazio">Seu carnê ainda está em branco</h2>
+      <p>
+        Em três minutos você conta a renda, o cartão e as parcelas em andamento, e a sobra de cada
+        mês aparece.
+      </p>
+      <a class="botao" routerLink="/comecar">Montar meu carnê</a>
+    </section>
+  }
+  <div class="corpo" [class.corpo--lista]="modo() === 'lista'">
     <div class="principal">
-      <div class="placar" aria-live="polite">
+      <div class="placar" [class.placar--estimada]="estimada()" aria-live="polite">
         <span>{{ sobra() < 0 ? 'Faltam' : 'Sobram' }}</span>
         <strong><app-valor [centavos]="sobra() < 0 ? -sobra() : sobra()" /></strong>
+        <span class="placar__confianca">{{ estimada() ? 'estimado' : 'firme' }}</span>
       </div>
-      <app-ilha-mes
-        [dados]="ilha"
-        [selecionado]="selecionado()"
-        (selecionar)="selecionar($event)"
-        (deslizar)="deslizar($event)"
-      />
+      <p class="atualizado">{{ atualizado() }}</p>
+      @if (modo() === 'cena') {
+        <app-ilha-mes
+          [dados]="ilha"
+          [selecionado]="selecionado()"
+          (selecionar)="selecionar($event)"
+          (deslizar)="deslizar($event)"
+        />
+      } @else if (mes(); as detalhe) {
+        <app-resumo-mes [mes]="detalhe" />
+      }
       <app-calendario-meses [meses]="store.meses()" [atual]="competencia()" />
     </div>
     <div class="lateral">
@@ -57,8 +87,10 @@
         [categorias]="store.categorias()"
         (mudou)="store.aplicarFiltros($event)"
       />
-      @if (mes(); as detalhe) {
-        <app-resumo-mes [mes]="detalhe" [destaque]="selecionado()" />
+      @if (modo() === 'cena') {
+        @if (mes(); as detalhe) {
+          <app-resumo-mes [mes]="detalhe" [destaque]="selecionado()" />
+        }
       }
     </div>
   </div>
